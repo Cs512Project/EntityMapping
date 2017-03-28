@@ -20,7 +20,7 @@ for line in linesType:
         typeMapDict[freebasetype] = cattype
 
 fileFreeBaseMidTypeSample = open('../data/KBP16/freebase-mid-type_sample_2.map', 'r')
-fileMissingTypeMapping = open('MissingTypeMapping.txt', 'w+')
+fileMissingTypeMapping = open('MissingTypeMapping.txt', 'w+')   # output file
 lineFreeBaseMidTypeSample = fileFreeBaseMidTypeSample.readlines()
 
 sampleDict = {}
@@ -49,7 +49,7 @@ for line in lineFreeBaseMidTypeSample:
         countTypeMap += 1
     else:
         sampleDict[freebaseValueConverted] = ''
-        fileMissingTypeMapping.write(freebaseValueConverted + os.linesep)
+        fileMissingTypeMapping.write(freebaseValueConverted + "\t" + freebaseTypeConverted + os.linesep)
         countTypeNotMap += 1
 
 print countTypeMap
@@ -86,8 +86,8 @@ print countFbMap
 print countFbNotMap
 
 fileMentions = open('FilteredEntityMention.txt', 'r')
-fileFreebase = open('FilteredEntityMentionWithFreebase.txt', 'w+')
-fileFreebaseUrl = open('FreebaseUrlType.txt', 'w+')
+fileFreebase = open('FilteredEntityMentionWithFreebase.txt', 'w+')  # output file
+fileFreebaseUrl = open('FreebaseUrlType.txt', 'w+')                 # output file
 
 mentionLines = fileMentions.readlines()
 
