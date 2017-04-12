@@ -49,7 +49,7 @@ pos_tag_df=pos_tag_df[~pos_tag_df["POS"].isin(["IN","DT","PRP$"])]
 ############################################################
 """
 # loading raw text
-df=pd.read_csv("data/KBP16/en/train_raw.txt",sep="\t",header=None,index_col=False)
+df=pd.read_csv("en/train_raw.txt",sep="\t",header=None,index_col=False)
 sentences=df[1]
 len(sentences)
 
@@ -80,8 +80,8 @@ model = word2vec.Word2Vec(clean_sentences, size=200)
 """
 model=word2vec.Word2Vec.load('300features')
 np_200=[]
-Entity=pos_tag_df['Entity']
-Type=pos_tag_df['Type']
+Entity=np.array(pos_tag_df['Entity'])
+Type=np.array(pos_tag_df['Type'])
 for i in range(len(Entity)):
     e=Content_process(Entity[i])
     if e in model.wv.vocab:
@@ -92,6 +92,8 @@ for i in range(len(Entity)):
     
 train_data=pd.DataFrame.from_records(np_200)  
 pd.unique(train_data[201])  
+train_data.to_csv("w2v.csv",sep=",",header=False)
+
 
 
 
